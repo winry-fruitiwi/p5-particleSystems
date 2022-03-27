@@ -1,11 +1,12 @@
 /**
  *  @author
- *  @date 2022.03.
+ *  @date 2022.03.27
  *
  *
  */
 let font
 let instructions
+let particles
 
 
 function preload() {
@@ -19,6 +20,12 @@ function setup() {
     colorMode(HSB, 360, 100, 100, 100)
     textFont(font, 14)
 
+    particles = []
+
+    for (let i = 0; i < 100; i++) {
+        particles.push(new Particle(random(width), random(height)))
+    }
+
     /* initialize instruction div */
     instructions = select('#ins')
     instructions.html(`<pre>
@@ -30,7 +37,16 @@ function setup() {
 function draw() {
     background(234, 34, 24)
 
+    let gravity = new p5.Vector(0, 0.001)
 
+    for (let i = 0; i < particles.length; i++) {
+        let particle = particles[i]
+
+        particle.show()
+        particle.update()
+        particle.edges()
+        particle.applyForce(gravity)
+    }
 
     displayDebugCorner()
 }

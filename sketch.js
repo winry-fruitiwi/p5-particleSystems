@@ -22,7 +22,9 @@ function setup() {
 
     particles = []
 
-    for (let i = 0; i < 100; i++) {
+    strokeWeight(2)
+
+    for (let i = 0; i < 1; i++) {
         particles.push(new Particle(random(width), random(height)))
     }
 
@@ -37,15 +39,22 @@ function setup() {
 function draw() {
     background(234, 34, 24)
 
-    let gravity = new p5.Vector(0, 0.001)
+    particles.push(new Particle(random(width), random(height)))
+    particles.push(new Particle(random(width), random(height)))
 
-    for (let i = 0; i < particles.length; i++) {
+    // let gravity = new p5.Vector(0, 0.001)
+
+    for (let i = particles.length - 1; i > 0; i--) {
         let particle = particles[i]
 
-        particle.show()
         particle.update()
         particle.edges()
-        particle.applyForce(gravity)
+        particle.show()
+        // particle.applyForce(gravity)
+
+        if (particle.isFinished()) {
+            particles.splice(i, 1)
+        }
     }
 
     displayDebugCorner()

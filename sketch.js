@@ -4,9 +4,10 @@
  *
  *
  */
-let font
+let font, emitter
 let instructions
 let particles
+let gravity
 
 
 function preload() {
@@ -20,11 +21,13 @@ function setup() {
     colorMode(HSB, 360, 100, 100, 100)
     textFont(font, 14)
 
+    gravity = new p5.Vector(0, 0.05)
     particles = []
+    emitter = new Emitter(3)
 
     strokeWeight(2)
 
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 100; i++) {
         particles.push(new Particle(random(width), random(height)))
     }
 
@@ -39,23 +42,25 @@ function setup() {
 function draw() {
     background(234, 34, 24)
 
-    particles.push(new Particle(random(width), random(height)))
-    particles.push(new Particle(random(width), random(height)))
+    // particles.push(new Particle(random(width), random(height)))
 
-    // let gravity = new p5.Vector(0, 0.001)
 
-    for (let i = particles.length - 1; i > 0; i--) {
+    for (let i = particles.length - 1; i >= 0; i--) {
         let particle = particles[i]
 
         particle.update()
         particle.edges()
         particle.show()
-        // particle.applyForce(gravity)
+        particle.applyForce(gravity)
 
         if (particle.isFinished()) {
             particles.splice(i, 1)
         }
     }
+
+    emitter.show()
+    emitter.update()
+    emitter.emit()
 
     displayDebugCorner()
 }

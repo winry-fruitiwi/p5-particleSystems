@@ -1,7 +1,9 @@
 class Particle {
+    //TODO cute addition: find real-life particle colors, make dictionaries
+    // out of them, select random color
     constructor(x, y) {
         this.pos = new p5.Vector(x, y)
-        this.vel = p5.Vector.random2D()
+        this.vel = p5.Vector.random2D().mult(0.5)
         this.acc = new p5.Vector() // equivalent to p5.Vector(0, 0)
 
         // particle radius. I added randomization just to make it look nice.
@@ -18,7 +20,7 @@ class Particle {
     // modifies the particle's position, velocity, and acceleration
     update() {
         // when we update, we also update the lifetime.
-        this.lifetime -= random(0.1, 2)
+        this.lifetime -= random(0.1, 2.5)
 
         this.pos.add(this.vel)
         this.vel.add(this.acc)
@@ -27,7 +29,9 @@ class Particle {
     }
 
 
-    // displays the particle as a white dot
+    // displays the particle as a colored dot.
+    // TODO cute addition: render as three circles. When dead, particle
+    //  shatters and the circles have a lifetime!
     show() {
         fill(this.hue, 80, 90, this.lifetime)
 
@@ -76,6 +80,8 @@ class Particle {
         }
     }
 
+
+    // is the particle dead? : ( at least it gets to sparkle at the end.
     isFinished() {
         return this.lifetime <= 0
     }

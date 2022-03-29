@@ -32,9 +32,15 @@ class Emitter {
 
     // emits some number of particles based on this.emissionRate
     emit() {
+        let types = ["confetti", "particle"]
         let emittedParticles = this.emissionRate + int(random(-5, 5))
         for (let i = 0; i < emittedParticles; i++) {
-            this.particles.push(new Particle(this.pos.x, this.pos.y))
+            let type = random(types)
+
+            if (type === "confetti")
+                this.particles.push(new TriangleConfetti(this.pos.x, this.pos.y))
+            else if (type === "particle")
+                this.particles.push(new Particle(this.pos.x, this.pos.y))
         }
     }
 

@@ -20,7 +20,7 @@ class Particle {
     // modifies the particle's position, velocity, and acceleration
     update() {
         // when we update, we also update the lifetime.
-        this.lifetime -= random(0.1, 2.5)
+        this.lifetime -= random(0.1, 1)
 
         this.pos.add(this.vel)
         this.vel.add(this.acc)
@@ -61,22 +61,26 @@ class Particle {
     edges() {
         // if the particle hits the left edge, teleport it to the right
         if (this.pos.x < 0) {
-            this.pos.x = width
+            this.pos.x = 0
+            this.vel.x *= -1
         }
 
         // if the particle hits the right edge, teleport it to the left
         if (this.pos.x > width) {
-            this.pos.x = 0
+            this.pos.x = width
+            this.vel.x *= -1
         }
 
         // if the particle hits the top edge, teleport it to the bottom
         if (this.pos.y < 0) {
-            this.pos.y = height
+            this.pos.y = 0
+            this.vel.y *= -1
         }
 
         // if the particle hits the bottom edge, teleport it to the top
         if (this.pos.y > height) {
-            this.pos.y = 0
+            this.pos.y = height
+            this.vel.y *= -1
         }
     }
 

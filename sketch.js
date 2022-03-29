@@ -20,10 +20,11 @@ function setup() {
     cnv.parent('#canvas')
     colorMode(HSB, 360, 100, 100, 100)
     textFont(font, 14)
+    rectMode(CENTER)
 
     gravity = new p5.Vector(0, 0.05)
     particles = []
-    emitter = new Emitter(3)
+    emitter = new Emitter(1)
 
     strokeWeight(2)
 

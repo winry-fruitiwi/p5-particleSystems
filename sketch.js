@@ -61,7 +61,11 @@ function draw() {
 
     emitter.show()
     emitter.update()
-    emitter.emit()
+    if (frameCount % 1 === 0) {
+        emitter.emit()
+    }
+
+    fill(0, 0, 100)
 
     displayDebugCorner()
 }
